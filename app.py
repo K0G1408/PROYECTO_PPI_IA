@@ -7,18 +7,17 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS  # <-- Asegúrate de tener esto instalado
 import IA
 
-app = Flask(__name__)
+app = Flask(__name__)  # <-- ¡Los dobles guiones bajos en __name__!
 
-# Configuración CORS CRUCIAL (NO COMENTAR)
+# Configuración CORRECTA de CORS (sin errores de paréntesis)
 CORS(
     app,
     origins=["https://proyectoppi-production.up.railway.app"],
-    methods=["POST", "OPTIONS"],  # OPTIONS es requerido para preflight
+    methods=["POST", "OPTIONS"],
     allow_headers=["Content-Type"]
-)
+)  # <-- Paréntesis de cierre OK
 
-@app.route('/predict', methods=['POST', 'OPTIONS'])  # <-- ¡Añade OPTIONS!
-app.config['UPLOAD_FOLDER'] = './uploads'
+app.config['UPLOAD_FOLDER'] = './uploads'  # Ahora línea 21 debería funcionar
 app.config['ALLOWED_EXTENSIONS'] = {'jpg', 'jpeg', 'png', 'gif'}
 
 @app.route('/predict', methods=['POST'])
