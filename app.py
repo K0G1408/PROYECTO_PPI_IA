@@ -3,17 +3,21 @@ from PIL import Image
 from io import BytesIO
 import numpy as np
 from tensorflow.keras.preprocessing.image import img_to_array, load_img
-from flask_cors import CORS  # Importar CORS
+from flask import Flask, request, jsonify
+from flask_cors import CORS  # <-- Asegúrate de tener esto instalado
 import IA
 
 app = Flask(__name__)
-CORS(app, resources={
-    r"/predict": {
-        "origins": ["https://proyectoppi-production.up.railway.app"],
-        "methods": ["POST"],
-        "allow_headers": ["Content-Type"]
-    }
-})
+
+# Configuración CORS CRUCIAL (NO COMENTAR)
+CORS(
+    app,
+    origins=["https://proyectoppi-production.up.railway.app"],
+    methods=["POST", "OPTIONS"],  # OPTIONS es requerido para preflight
+    allow_headers=["Content-Type"]
+)
+
+@app.route('/predict', methods=['POST', 'OPTIONS'])  # <-- ¡Añade OPTIONS!
 app.config['UPLOAD_FOLDER'] = './uploads'
 app.config['ALLOWED_EXTENSIONS'] = {'jpg', 'jpeg', 'png', 'gif'}
 
