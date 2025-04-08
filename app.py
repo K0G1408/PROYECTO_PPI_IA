@@ -7,7 +7,7 @@ from flask_cors import CORS  # Importar CORS
 import IA
 
 app = Flask(__name__)
-CORS(app, origins=["https://proyectoppi-production.up.railway.app"])
+CORS(app, resources={r"/*": {"origins": "*"}})
 app.config['UPLOAD_FOLDER'] = './uploads'
 app.config['ALLOWED_EXTENSIONS'] = {'jpg', 'jpeg', 'png', 'gif'}
 
