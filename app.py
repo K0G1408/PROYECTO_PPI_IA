@@ -11,17 +11,7 @@ import os
 app = Flask(__name__)  # <-- ¡Los dobles guiones bajos en __name__!
 
 # Configuración CORRECTA de CORS (sin errores de paréntesis)
-CORS(
-    app,
-    resources={
-        r"/predict": {
-            "origins": "https://proyectoppi-production.up.railway.app",
-            "methods": ["POST", "OPTIONS"],
-            "allow_headers": ["Content-Type", "Authorization"]
-        }
-    }
-)
-CORS(app, supports_credentials=True)
+CORS(app, resources={r"/*": {"origins": "*"}})
 
 app.config['UPLOAD_FOLDER'] = './uploads'  # Ahora línea 21 debería funcionar
 app.config['ALLOWED_EXTENSIONS'] = {'jpg', 'jpeg', 'png', 'gif'}
