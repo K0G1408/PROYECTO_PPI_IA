@@ -6,6 +6,7 @@ from tensorflow.keras.preprocessing.image import img_to_array, load_img
 from flask import Flask, request, jsonify
 from flask_cors import CORS  # <-- Asegúrate de tener esto instalado
 import IA
+import os
 
 app = Flask(__name__)  # <-- ¡Los dobles guiones bajos en __name__!
 
