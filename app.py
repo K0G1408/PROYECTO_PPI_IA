@@ -3,11 +3,11 @@ from PIL import Image
 from io import BytesIO
 import numpy as np
 from tensorflow.keras.preprocessing.image import img_to_array, load_img
-from flask_cors import CORS  # Importar CORS
+#from flask_cors import CORS  # Importar CORS
 import IA
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "*"}})
+#CORS(app, resources={r"/*": {"origins": "*"}})
 app.config['UPLOAD_FOLDER'] = './uploads'
 app.config['ALLOWED_EXTENSIONS'] = {'jpg', 'jpeg', 'png', 'gif'}
 
