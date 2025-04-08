@@ -17,6 +17,8 @@ CORS(
     allow_headers=["Content-Type"]
 )  # <-- Paréntesis de cierre OK
 
+CORS(app, resources={r"/predict": {"origins": "*"}})
+
 app.config['UPLOAD_FOLDER'] = './uploads'  # Ahora línea 21 debería funcionar
 app.config['ALLOWED_EXTENSIONS'] = {'jpg', 'jpeg', 'png', 'gif'}
 
@@ -26,6 +28,15 @@ def after_request(response):
     response.headers.add('Access-Control-Allow-Headers', 'Content-Type')
     response.headers.add('Access-Control-Allow-Methods', 'POST')
     return response
+
+@app.route('/predict', methods=['OPTIONS'])
+def options_ask():
+    response = make_response()
+    response.headers['Access-Control-Allow-Origin'] = "https://proyectoppi-production.up.railway.app"
+    response.headers['Access-Control-Allow-Methods'] = "POST, OPTIONS"
+    response.headers['Access-Control-Allow-Headers'] = "Content-Type"
+    return response, 200
+
     
 @app.route('/predict', methods=['POST'])
 def predict():
