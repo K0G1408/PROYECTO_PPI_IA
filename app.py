@@ -20,6 +20,13 @@ CORS(
 app.config['UPLOAD_FOLDER'] = './uploads'  # Ahora línea 21 debería funcionar
 app.config['ALLOWED_EXTENSIONS'] = {'jpg', 'jpeg', 'png', 'gif'}
 
+@app.after_request
+def after_request(response):
+    response.headers.add('Access-Control-Allow-Origin', 'https://proyectoppi-production.up.railway.app')
+    response.headers.add('Access-Control-Allow-Headers', 'Content-Type')
+    response.headers.add('Access-Control-Allow-Methods', 'POST')
+    return response
+    
 @app.route('/predict', methods=['POST'])
 def predict():
     if 'image' not in request.files:
