@@ -4,4 +4,4 @@ numpy
 librosa
 scikit-learn
 Pillow
-flask_cors
+flask-cors==4.0.0
